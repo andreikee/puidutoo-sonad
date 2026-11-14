@@ -107,13 +107,25 @@ let pos = 0;
 let answers = {};
 // stored quiz options per card so re-visiting shows the same locked set
 let quizOpts = {};
+// quiz round state: "main" | "retry"; ids answered wrong in the last round
+let quizStage = "main";
+let wrongIds = [];
 
 function filtered(){
   return cat === "all" ? order : order.filter(i => CARDS[i].cat === cat);
 }
+// the set of card indices the current quiz round asks about
+function quizPool(){
+  if(quizStage === "retry"){ return wrongIds; }
+  return filtered();
+}
 function cardIdx(){
   const f = filtered();
   return f.length ? f[pos % f.length] : -1;
+}
+// number of answered cards in the current quiz pool
+function answeredCount(){
+  return quizPool().filter(i => answers[CARDS[i].id]).length;
 }
 function speak(et){
   try{
@@ -127,7 +139,7 @@ function speak(et){
 function setMode(m, keepPos){
   mode = m;
   if(!keepPos) pos = 0;
-  answers = {}; quizOpts = {};
+  answers = {}; quizOpts = {}; quizStage = "main"; wrongIds = [];
   document.querySelectorAll(".mode").forEach(el => el.classList.toggle("active", el.dataset.mode===m));
   render();
 }
@@ -154,7 +166,17 @@ function render(){
     buildList(container);
     return;
   }
+
+  // Quiz mode: route to dedicated handler (its own nav/progress/finish logic)
+  if(mode === "quiz"){
+    renderQuiz(container, prog, nav);
+    return;
+  }
+
   nav.style.display = "flex";
+  document.getElementById("prev").style.display = "";
+  document.getElementById("next").style.display = "";
+  document.getElementById("shuffle").style.display = "";
   const f = filtered();
   prog.style.width = (f.length ? ((pos % f.length)+1)/f.length*100 : 0) + "%";
 
@@ -197,17 +219,70 @@ function render(){
       document.getElementById("showBtn").style.display = "none";
     };
     scorebar.innerHTML = "";
-  } else if(mode === "quiz"){
-    desc.classList.add("reveal");
-    buildQuiz(C, ru, controls, scorebar);
   }
+}
+
+// Quiz: show the next unanswered card, or the result screen when done.
+function renderQuiz(container, prog, nav){
+  const nidx = nextQuizCard();
+  if(nidx === -1){
+    nav.style.display = "none";
+    checkQuizDone();
+    return;
+  }
+  const pool = quizPool();
+  const answered = answeredCount();
+  const total = pool.length;
+
+  nav.style.display = "flex";
+  // hide prev/next/shuffle during quiz; we auto-advance + show result at end
+  document.getElementById("prev").style.display = "none";
+  document.getElementById("next").style.display = "none";
+  document.getElementById("shuffle").style.display = "none";
+
+  prog.style.width = (answered / total * 100) + "%";
+
+  const C = CARDS[nidx];
+  container.innerHTML = `
+    <div class="card">
+      <div class="imgbox">
+        <img src="data:image/jpeg;base64,${C.b64}" alt="">
+        <div class="hint-license" ${C.license ? '' : 'hidden'}>${C.license||''}</div>
+        <button class="speak" title="Послушать">🔊</button>
+      </div>
+      <div class="word-et">${C.et}</div>
+      <div class="word-ru" id="ru">${C.ru}</div>
+      <div class="desc reveal" id="desc">${C.desc||''}</div>
+      <div id="controls"></div>
+    </div>
+    <div class="scorebar" id="score"></div>`;
+  container.querySelector(".speak").onclick = () => speak(C.et);
+
+  const ru = container.querySelector("#ru");
+  const desc = container.querySelector("#desc");
+  const controls = container.querySelector("#controls");
+  const scorebar = container.querySelector("#score");
+  buildQuiz(C, ru, controls, scorebar);
 }
 function sample(arr,n){
   const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
   return a.slice(0,n);
 }
+// return the card index to show next in quiz, or -1 if quiz is complete
+function nextQuizCard(){
+  const pool = quizPool();
+  const unanswered = pool.filter(i => !answers[CARDS[i].id]);
+  if(unanswered.length === 0) return -1; // all answered -> finish
+  // prefer the first unanswered card after current pos (cyclic), else first
+  const cur = pos % pool.length;
+  for(let k=0; k<pool.length; k++){
+    const idx = pool[(cur + k) % pool.length];
+    if(!answers[CARDS[idx].id]) return idx;
+  }
+  return -1;
+}
 function buildQuiz(C, ru, controls, scorebar){
-  setScore(scorebar);
+  setScore(scorebar, true);
   ru.classList.add("reveal");
 
   if(answers[C.id]){
@@ -243,10 +318,77 @@ function showQuizOptions(controls, C, opts, locked){
       if(x.dataset.ru === C.ru) x.classList.add("correct");
     });
     if(!isRight) el.classList.add("wrong");
-    setScore(document.getElementById("score"));
+    setScore(document.getElementById("score"), true);
+    // progress to the next unanswered card after a short pause
+    setTimeout(() => {
+      const nidx = nextQuizCard();
+      if(nidx === -1) checkQuizDone();
+      else { pos = quizPool().indexOf(nidx); render(); }
+    }, 700);
   });
 }
-function setScore(scorebar){
+// called when all cards in the current quiz pool are answered
+function checkQuizDone(){
+  const pool = quizPool();
+  const r = pool.filter(i => answers[CARDS[i].id] === "right").length;
+  const w = pool.filter(i => answers[CARDS[i].id] === "wrong").length;
+  wrongIds = pool.filter(i => answers[CARDS[i].id] === "wrong");
+  showQuizResult(r, w);
+}
+function showQuizResult(r, w){
+  const container = document.getElementById("container");
+  const prog = document.getElementById("prog");
+  const nav = document.getElementById("nav");
+  const total = r + w;
+  nav.style.display = "none";
+  prog.style.width = "100%";
+  let extra = '';
+  if(quizStage === "retry"){
+    if(w === 0){
+      extra = '<p>💪 Все ошибки исправлены — молодец!</p>';
+    } else {
+      extra = `<p>Осталось ошибок: ${w}. Можно повторить ещё раз.</p>`;
+    }
+  } else if(w === 0){
+    extra = '<p>🏆 Отлично! Все ответы верны.</p>';
+  }
+  const retryBtn = (w > 0)
+    ? '<button class="btn" id="retryBtn">🔁 Повторить ошибки (' + w + ')</button>'
+    : '';
+  const againBtn = (quizStage === "retry")
+    ? '<button class="btn" id="againBtn">🔄 Пройти тест ещё раз</button>'
+    : '';
+  container.innerHTML = `
+    <div class="card" style="padding:30px 20px">
+      <div style="font-size:3rem">🎉</div>
+      <div class="word-et">Тест завершён!</div>
+      <div class="scorebar" style="font-size:1.2rem;gap:20px">
+        <span>✅ Правильно: ${r} из ${total}</span>
+        <span>❌ Ошибок: ${w}</span>
+      </div>
+      ${extra}
+      <div style="margin-top:16px">${retryBtn}${againBtn}</div>
+    </div>`;
+  const rb = document.getElementById("retryBtn");
+  if(rb) rb.onclick = () => startRetry();
+  const ab = document.getElementById("againBtn");
+  if(ab) ab.onclick = () => restartQuiz();
+}
+function startRetry(){
+  quizStage = "retry";
+  // keep wrongIds, clear answers & options so they can be asked again
+  answers = {}; quizOpts = {};
+  pos = 0;
+  render();
+}
+function restartQuiz(){
+  quizStage = "main";
+  wrongIds = [];
+  answers = {}; quizOpts = {};
+  pos = 0;
+  render();
+}
+function setScore(scorebar, quiz){
   if(!scorebar) return;
   let r=0,w=0;
   for(const id in answers){ if(answers[id]==="right") r++; else if(answers[id]==="wrong") w++; }
