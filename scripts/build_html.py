@@ -132,7 +132,7 @@ h2{font-size:1rem;font-weight:500;color:var(--muted);margin:0 0 12px}
   </div>
 
   <div class="footer">
-    Фотографии — Wikimedia Commons (свободные лицензии CC/Public Domain).<br>
+    Иллюстрации созданы с помощью ИИ специально для этого тренажёра.<br>
     Сделано с ❤️ для Полины.
   </div>
 </div>
