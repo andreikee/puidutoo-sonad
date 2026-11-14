@@ -17,7 +17,6 @@ terms = json.load(open(os.path.join(BASE, "data", "terms.json"), encoding="utf-8
 categories = terms["categories"]
 imgs = json.load(open(os.path.join(BASE, "data", "images.json"), encoding="utf-8"))
 
-# Build card data, downscale/compress images for a snappy single file.
 cards = []
 for t in terms["terms"]:
     tid = t["id"]
@@ -32,14 +31,11 @@ for t in terms["terms"]:
         "id": tid,
         "et": t["et"],
         "ru": t["ru"],
+        "desc": t.get("desc", ""),
         "cat": t["category"],
         "b64": b64,
         "license": mi.get("license", ""),
-        "title": mi.get("title", ""),
-        "artist": mi.get("artist", ""),
     })
-
-cat_by_id = {c["id"]: c for c in categories}
 
 cards_json = json.dumps(cards, ensure_ascii=False)
 cats_json = json.dumps(categories, ensure_ascii=False)
@@ -64,12 +60,10 @@ body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 .wrap{max-width:720px;margin:0 auto;padding:16px 14px 40px}
 h1{font-size:1.35rem;margin:4px 0 2px;color:#5b4020}
 h2{font-size:1rem;font-weight:500;color:var(--muted);margin:0 0 12px}
-.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
-.mode{background:#fff;border:2px solid #eee3d3;border-radius:14px;padding:10px 6px;
-  text-align:center;font-weight:700;font-size:.95rem;color:#b98a5a;cursor:pointer;
-  transition:.15s}
-.mode.active{border-color:var(--pine2);color:var(--pine);background:#f2fbf4;
-  box-shadow:var(--shadow)}
+.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.mode{background:#fff;border:2px solid #eee3d3;border-radius:14px;padding:10px 4px;
+  text-align:center;font-weight:700;font-size:.9rem;color:#b98a5a;cursor:pointer;transition:.15s}
+.mode.active{border-color:var(--pine2);color:var(--pine);background:#f2fbf4;box-shadow:var(--shadow)}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 16px}
 .chip{background:var(--chip);border:2px solid transparent;border-radius:999px;
   padding:6px 12px;font-size:.85rem;font-weight:600;color:#9a5c2a;cursor:pointer}
@@ -82,17 +76,16 @@ h2{font-size:1rem;font-weight:500;color:var(--muted);margin:0 0 12px}
 .card .hint-license{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.55);
   color:#fff;font-size:.68rem;padding:2px 7px;border-radius:999px}
 .word-et{font-size:1.9rem;font-weight:800;margin:14px 0 2px;color:#5b4020}
-.word-ru{font-size:1.15rem;color:var(--muted);margin:2px 0 14px}
-.reveal{display:none}
-.reveal.show{display:block}
+.word-ru{font-size:1.15rem;color:var(--muted);margin:2px 0 12px}
+.desc{font-size:.95rem;color:#7a5b39;margin:0 14px 14px;line-height:1.45}
+.reveal{display:none!important}
+.reveal.show{display:block!important}
 .btn{display:inline-block;border:none;border-radius:14px;padding:12px 22px;
   font-size:1rem;font-weight:700;cursor:pointer;color:#fff;background:var(--warm);
   margin:4px;transition:.15s}
 .btn:active{transform:scale(.97)}
-.btn.ghost{background:#eee3d3;color:#7a5b39}
 .speak{position:absolute;right:10px;top:10px;background:#fff;border:2px solid #eee3d3;
-  color:var(--pine);border-radius:999px;width:44px;height:44px;font-size:1.2rem;
-  cursor:pointer}
+  color:var(--pine);border-radius:999px;width:44px;height:44px;font-size:1.2rem;cursor:pointer;z-index:2}
 .nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
 .nav .btn{background:var(--blue)}
 .qopts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
@@ -100,11 +93,17 @@ h2{font-size:1rem;font-weight:500;color:var(--muted);margin:0 0 12px}
   font-size:1rem;font-weight:700;color:var(--ink);cursor:pointer}
 .qopt.correct{background:var(--good);border-color:var(--good);color:#fff}
 .qopt.wrong{background:var(--bad);border-color:var(--bad);color:#fff}
-.scorebar{display:flex;justify-content:center;gap:14px;font-weight:700;margin:6px 0;
-  color:#7a5b39}
+.qopt.dim{opacity:.55}
+.scorebar{display:flex;justify-content:center;gap:14px;font-weight:700;margin:6px 0;color:#7a5b39}
 .progress{height:8px;background:#eee3d3;border-radius:999px;overflow:hidden;margin:8px 0}
-.progress > div{height:100%;background:linear-gradient(90deg,var(--pine),var(--pine2));
-  width:0;transition:.3s}
+.progress > div{height:100%;background:linear-gradient(90deg,var(--pine),var(--pine2));width:0;transition:.3s}
+.listgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.listitem{background:#fff;border:2px solid #eee3d3;border-radius:16px;padding:10px;
+  text-align:center;cursor:pointer;transition:.12s}
+.listitem:active{transform:scale(.97)}
+.listitem img{width:100%;height:110px;object-fit:cover;border-radius:10px;background:#f0eadf}
+.listitem .li-et{font-weight:800;font-size:.95rem;color:#5b4020;margin-top:6px}
+.listitem .li-ru{font-size:.8rem;color:var(--muted)}
 .footer{font-size:.72rem;color:var(--muted);text-align:center;margin-top:18px;line-height:1.5}
 </style>
 </head>
@@ -116,31 +115,22 @@ h2{font-size:1rem;font-weight:500;color:var(--muted);margin:0 0 12px}
   <div class="modes" id="modes">
     <div class="mode active" data-mode="learn">📖 Учи</div>
     <div class="mode" data-mode="review">🔁 Повтори</div>
-    <div class="mode" data-mode="quiz">🎯 Викторина</div>
+    <div class="mode" data-mode="quiz">🎯 Тест</div>
+    <div class="mode" data-mode="list">📚 Список</div>
   </div>
 
   <div class="chips" id="chips"></div>
-  <div class="progress"><div id="prog"></div></div>
+  <div class="progress" id="progwrap"><div id="prog"></div></div>
 
-  <div class="card" id="card">
-    <div class="imgbox" id="imgbox">
-      <img id="img" alt="">
-      <div class="hint-license" id="lic" hidden></div>
-      <button class="speak" id="speak" title="Послушать">🔊</button>
-    </div>
-    <div class="word-et" id="et"></div>
-    <div class="word-ru" id="ru"></div>
-    <div id="controls"></div>
-  </div>
+  <div id="container"></div>
 
-  <div class="scorebar" id="score"></div>
-  <div class="nav">
+  <div class="nav" id="nav">
     <button class="btn" id="prev">← Назад</button>
     <button class="btn" id="shuffle">🔀 Перемешать</button>
     <button class="btn" id="next">Дальше →</button>
   </div>
 
-  <div class="footer" id="footer">
+  <div class="footer">
     Фотографии — Wikimedia Commons (свободные лицензии CC/Public Domain).<br>
     Сделано с ❤️ для Полины.
   </div>
@@ -154,14 +144,15 @@ let mode = "learn";
 let cat = "all";
 let order = CARDS.map((c,i)=>i);
 let pos = 0;
-let score = {right:0, wrong:0};
-let quizAnswered = false;
-let quizOptions = [];
+// per-card quiz answer state across the session: id -> "right" | "wrong"
+let answers = {};
+// stored quiz options per card so re-visiting shows the same locked set
+let quizOpts = {};
 
 function filtered(){
   return cat === "all" ? order : order.filter(i => CARDS[i].cat === cat);
 }
-function card(){
+function cardIdx(){
   const f = filtered();
   return f.length ? f[pos % f.length] : -1;
 }
@@ -174,13 +165,15 @@ function speak(et){
     speechSynthesis.speak(u);
   }catch(e){}
 }
-
+function setMode(m){
+  mode = m; pos = 0; answers = {}; quizOpts = {};
+  document.querySelectorAll(".mode").forEach(el => el.classList.toggle("active", el.dataset.mode===m));
+  render();
+}
 function renderChips(){
   const ch = document.getElementById("chips");
   let html = '<div class="chip active" data-cat="all">Все</div>';
-  for(const c of CATS){
-    html += `<div class="chip" data-cat="${c.id}">${c.icon} ${c.titleRu}</div>`;
-  }
+  for(const c of CATS){ html += `<div class="chip" data-cat="${c.id}">${c.icon} ${c.titleRu}</div>`; }
   ch.innerHTML = html;
   ch.querySelectorAll(".chip").forEach(el => el.onclick = () => {
     cat = el.dataset.cat; pos = 0;
@@ -189,99 +182,135 @@ function renderChips(){
     render();
   });
 }
-
 function render(){
-  const idx = card();
-  document.getElementById("prog").style.width =
-    (filtered().length ? ((pos % filtered().length)+1)/filtered().length*100 : 0) + "%";
+  const container = document.getElementById("container");
+  const prog = document.getElementById("prog");
+  const nav = document.getElementById("nav");
 
-  if(idx === -1){ document.getElementById("card").innerHTML = "<p>Нет карточек</p>"; return; }
+  if(mode === "list"){
+    prog.style.width = "100%";
+    nav.style.display = "none";
+    buildList(container);
+    return;
+  }
+  nav.style.display = "flex";
+  const f = filtered();
+  prog.style.width = (f.length ? ((pos % f.length)+1)/f.length*100 : 0) + "%";
+
+  const idx = cardIdx();
+  if(idx === -1){ container.innerHTML = "<p>Нет карточек</p>"; return; }
   const C = CARDS[idx];
-  const img = document.getElementById("img");
-  img.src = "data:image/jpeg;base64," + C.b64;
-  const lic = document.getElementById("lic");
-  if(C.license){ lic.hidden = false; lic.textContent = C.license; } else lic.hidden = true;
-  document.getElementById("et").textContent = C.et;
-  const ru = document.getElementById("ru");
-  const controls = document.getElementById("controls");
-  const scorebar = document.getElementById("score");
+
+  container.innerHTML = `
+    <div class="card">
+      <div class="imgbox">
+        <img src="data:image/jpeg;base64,${C.b64}" alt="">
+        <div class="hint-license" ${C.license ? '' : 'hidden'}>${C.license||''}</div>
+        <button class="speak" title="Послушать">🔊</button>
+      </div>
+      <div class="word-et">${C.et}</div>
+      <div class="word-ru" id="ru">${C.ru}</div>
+      <div class="desc">${C.desc||''}</div>
+      <div id="controls"></div>
+    </div>
+    <div class="scorebar" id="score"></div>`;
+  container.querySelector(".speak").onclick = () => speak(C.et);
+
+  const ru = container.querySelector("#ru");
+  const controls = container.querySelector("#controls");
+  const scorebar = container.querySelector("#score");
 
   if(mode === "learn"){
-    ru.textContent = C.ru;
     ru.classList.remove("reveal");
     controls.innerHTML = "";
     scorebar.innerHTML = "";
-  }
-  else if(mode === "review"){
-    ru.textContent = C.ru;
+  } else if(mode === "review"){
     ru.classList.add("reveal");
+    // desc hidden too in review until reveal
     controls.innerHTML = '<button class="btn" id="showBtn">Показать перевод 👀</button>';
     document.getElementById("showBtn").onclick = () => ru.classList.remove("reveal");
     scorebar.innerHTML = "";
+  } else if(mode === "quiz"){
+    buildQuiz(C, ru, controls, scorebar);
   }
-  else { // quiz
-    buildQuiz(C);
-  }
-  document.getElementById("speak").onclick = () => speak(C.et);
 }
+function sample(arr,n){
+  const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a.slice(0,n);
+}
+function buildQuiz(C, ru, controls, scorebar){
+  setScore(scorebar);
+  ru.classList.add("reveal");
 
-function buildQuiz(C){
-  // pick 3 distractors from same category preferentially, else any
+  if(answers[C.id]){
+    // already answered -> show locked result, no double count
+    showQuizOptions(controls, C, quizOpts[C.id], answers[C.id]);
+    return;
+  }
+
   const pool = CARDS.filter(c => c.id !== C.id);
   const sameCat = pool.filter(c => c.cat === C.cat);
   const others = pool.filter(c => c.cat !== C.cat);
-  function sample(arr,n){
-    const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
-    return a.slice(0,n);
-  }
-  lets = [];
-  const s = sample(sameCat, Math.min(3, sameCat.length));
-  lets.push(...s);
-  if(lets.length < 3) lets.push(...sample(others, 3 - lets.length));
+  let lets = sample(sameCat, Math.min(3, sameCat.length));
+  if(lets.length < 3) lets = lets.concat(sample(others, 3 - lets.length));
   const opts = lets.slice(0,3).map(c => c.ru);
   opts.push(C.ru);
   opts.sort(() => Math.random() - 0.5);
-  quizOptions = opts;
-  quizAnswered = false;
-
-  const ru = document.getElementById("ru");
-  ru.textContent = "";
-  ru.classList.remove("reveal");
-  const controls = document.getElementById("controls");
+  quizOpts[C.id] = opts;
+  showQuizOptions(controls, C, opts, null);
+}
+function showQuizOptions(controls, C, opts, locked){
   controls.innerHTML = '<div class="qopts">' +
-    opts.map(o => `<div class="qopt" data-ru="${o.replace(/"/g,'&quot;')}">${o}</div>`).join('') +
-    '</div>';
+    opts.map(o => {
+      let cls = "qopt";
+      if(locked){ cls += " dim"; if(o === C.ru) cls += " correct"; }
+      return `<div class="qopt ${cls}" data-ru="${o.replace(/"/g,'&quot;')}">${o}</div>`;
+    }).join('') + '</div>';
   controls.querySelectorAll(".qopt").forEach(el => el.onclick = () => {
-    if(quizAnswered) return;
-    quizAnswered = true;
-    if(el.dataset.ru === C.ru){
-      el.classList.add("correct"); score.right++;
-    } else {
-      el.classList.add("wrong"); score.wrong++;
-      controls.querySelectorAll(".qopt").forEach(x=>{ if(x.dataset.ru===C.ru) x.classList.add("correct"); });
-    }
-    const scorebar = document.getElementById("score");
-    scorebar.innerHTML = `<span>✅ ${score.right}</span><span>❌ ${score.wrong}</span>`;
+    if(answers[C.id]) return; // locked
+    const isRight = el.dataset.ru === C.ru;
+    answers[C.id] = isRight ? "right" : "wrong";
+    controls.querySelectorAll(".qopt").forEach(x=>{
+      x.classList.add("dim");
+      if(x.dataset.ru === C.ru) x.classList.add("correct");
+    });
+    if(!isRight) el.classList.add("wrong");
+    setScore(document.getElementById("score"));
   });
-  document.getElementById("score").innerHTML = `<span>✅ ${score.right}</span><span>❌ ${score.wrong}</span>`;
 }
-
-function setMode(m){
-  mode = m; pos = 0; score = {right:0, wrong:0};
-  document.querySelectorAll(".mode").forEach(el => el.classList.toggle("active", el.dataset.mode===m));
-  render();
+function setScore(scorebar){
+  if(!scorebar) return;
+  let r=0,w=0;
+  for(const id in answers){ if(answers[id]==="right") r++; else if(answers[id]==="wrong") w++; }
+  scorebar.innerHTML = `<span>✅ ${r}</span><span>❌ ${w}</span>`;
 }
-
+function buildList(container){
+  const f = filtered();
+  let html = '<div class="listgrid">';
+  for(const i of f){
+    const C = CARDS[i];
+    html += `<div class="listitem" data-card="${i}">
+        <img src="data:image/jpeg;base64,${C.b64}" alt="">
+        <div class="li-et">${C.et}</div><div class="li-ru">${C.ru}</div></div>`;
+  }
+  html += '</div>';
+  container.innerHTML = html;
+  container.querySelectorAll(".listitem").forEach(el => el.onclick = () => {
+    const ci = parseInt(el.dataset.card, 10);
+    const f2 = filtered();
+    const rel = f2.indexOf(ci);
+    if(rel >= 0){ pos = rel; setMode("learn"); }
+  });
+}
 document.getElementById("modes").querySelectorAll(".mode").forEach(el =>
   el.onclick = () => setMode(el.dataset.mode));
-
 document.getElementById("next").onclick = () => { pos++; render(); };
 document.getElementById("prev").onclick = () => { pos = Math.max(0, pos-1); render(); };
 document.getElementById("shuffle").onclick = () => {
   order = CARDS.map((c,i)=>i).sort(() => Math.random()-0.5);
-  pos = 0; render();
+  pos = 0; answers = {}; quizOpts = {};
+  render();
 };
-
 renderChips();
 render();
 </script>

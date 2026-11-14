@@ -1,0 +1,546 @@
+{
+ "purpose": "Generate a set of child-friendly educational images for a woodwork vocabulary trainer (age 11, 5th grade).",
+ "output": {
+  "format": "jpg",
+  "size": "512x512",
+  "style": "Clean, simple educational photo/illustration on a plain light background; single subject centered; soft even lighting; no text, no watermark, no logos; square 1:1. For diagram terms (dimensions and views), a simple labeled line drawing is fine."
+ },
+ "images": [
+  {
+   "filename": "puit.jpg",
+   "term_et": "Puit",
+   "term_ru": "древесина",
+   "category": "puitmaterjalid",
+   "description": "Материал, из которого состоит ствол и ветки дерева. Из древесины делают мебель, дома и игрушки.",
+   "prompt": "natural wood texture, stacked wooden boards"
+  },
+  {
+   "filename": "okaspuu.jpg",
+   "term_et": "Okaspuu",
+   "term_ru": "хвойное дерево",
+   "category": "puitmaterjalid",
+   "description": "Дерево с иголками вместо листьев, например сосна или ель. Из хвойной древесины делают доски и брёвна.",
+   "prompt": "stack of light-colored conifer (pine/spruce) wooden boards in a workshop"
+  },
+  {
+   "filename": "lehtpuu.jpg",
+   "term_et": "Lehtpuu",
+   "term_ru": "лиственное дерево",
+   "category": "puitmaterjalid",
+   "description": "Дерево с листьями, например дуб или берёза. Древесина лиственных деревьев обычно твёрдая, из неё делают мебель.",
+   "prompt": "stack of hardwood boards (oak/birch), close-up of wood grain"
+  },
+  {
+   "filename": "mand.jpg",
+   "term_et": "Mänd (männipuu)",
+   "term_ru": "сосна",
+   "category": "puitmaterjalid",
+   "description": "Хвойное дерево с длинными иголками и шишками. Сосновая доска — светлая и мягкая, её легко пилить.",
+   "prompt": "light pine wood planks, softwood timber"
+  },
+  {
+   "filename": "kuusk.jpg",
+   "term_et": "Kuusk (kuusepuu)",
+   "term_ru": "ель",
+   "category": "puitmaterjalid",
+   "description": "Хвойное дерево с короткими колючими иголками. Из еловой древесины делают доски, а ещё — бумагу.",
+   "prompt": "pale spruce wood boards, fine softwood planks"
+  },
+  {
+   "filename": "kask.jpg",
+   "term_et": "Kask (kasepuu)",
+   "term_ru": "берёза",
+   "category": "puitmaterjalid",
+   "description": "Лиственное дерево с белой корой. Берёзовая древесина — светлая и прочная.",
+   "prompt": "birch wood board, pale fine-grained hardwood planks"
+  },
+  {
+   "filename": "tamm.jpg",
+   "term_et": "Tamm (tammepuu)",
+   "term_ru": "дуб",
+   "category": "puitmaterjalid",
+   "description": "Крепкое лиственное дерево. Дубовая древесина — твёрдая и тёмная, из неё делают прочную мебель.",
+   "prompt": "oak wood board, strong dark hardwood plank"
+  },
+  {
+   "filename": "vaher.jpg",
+   "term_et": "Vaher (vahtrapuu)",
+   "term_ru": "клён",
+   "category": "puitmaterjalid",
+   "description": "Лиственное дерево с красивыми резными листьями. Древесина клёна — светлая и твёрдая.",
+   "prompt": "maple wood board, pale fine hardwood plank"
+  },
+  {
+   "filename": "saar.jpg",
+   "term_et": "Saar (saarepuu)",
+   "term_ru": "ясень",
+   "category": "puitmaterjalid",
+   "description": "Лиственное дерево с длинными овальными листьями. Древесина ясеня — прочная и упругая, из неё делают ручки инструментов.",
+   "prompt": "ash wood board, light hardwood with visible grain"
+  },
+  {
+   "filename": "parn.jpg",
+   "term_et": "Pärn (pärnapuu)",
+   "term_ru": "липа",
+   "category": "puitmaterjalid",
+   "description": "Дерево с мягкой светлой древесиной. Из липы легко вырезать ложки и игрушки.",
+   "prompt": "soft pale linden (lime) wood, carving wood block"
+  },
+  {
+   "filename": "lepp.jpg",
+   "term_et": "Lepp (lepapuu)",
+   "term_ru": "ольха",
+   "category": "puitmaterjalid",
+   "description": "Дерево, которое часто растёт у воды. Древесина ольхи — мягкая, из неё делают фанеру.",
+   "prompt": "alder wood board, soft light-colored wood"
+  },
+  {
+   "filename": "umarpuit.jpg",
+   "term_et": "Ümarpuit",
+   "term_ru": "кругляк",
+   "category": "puitmaterjalid",
+   "description": "Ствол дерева, очищенный от веток, круглый в сечении. Из кругляка делают доски и брёвна.",
+   "prompt": "stack of round debarked logs, roundwood"
+  },
+  {
+   "filename": "palk.jpg",
+   "term_et": "Palk",
+   "term_ru": "бревно",
+   "category": "puitmaterjalid",
+   "description": "Толстый круглый ствол дерева. Из брёвен строят дома или распиливают их на доски.",
+   "prompt": "large single log, timber trunk"
+  },
+  {
+   "filename": "saekaater.jpg",
+   "term_et": "Saekaater",
+   "term_ru": "пилорама",
+   "category": "puitmaterjalid",
+   "description": "Место или машина, где брёвна распиливают на доски.",
+   "prompt": "sawmill with large saw blade cutting a log into boards"
+  },
+  {
+   "filename": "saematerjal.jpg",
+   "term_et": "Saematerjal",
+   "term_ru": "пиломатериал",
+   "category": "puitmaterjalid",
+   "description": "Доски, брусья и другие детали, полученные при распиливании брёвен.",
+   "prompt": "stack of sawn timber boards and beams"
+  },
+  {
+   "filename": "pruss.jpg",
+   "term_et": "Pruss",
+   "term_ru": "брус",
+   "category": "puitmaterjalid",
+   "description": "Толстый прямоугольный кусок дерева, толще обычной доски. Из брусьев делают каркасы.",
+   "prompt": "thick square wooden beam / timber"
+  },
+  {
+   "filename": "servamatalaud.jpg",
+   "term_et": "Servamata laud",
+   "term_ru": "необрезная доска",
+   "category": "puitmaterjalid",
+   "description": "Доска с неровными краями, где ещё осталась кора. Её ещё не обрезали ровно.",
+   "prompt": "rough wooden board with bark still on the uneven edges"
+  },
+  {
+   "filename": "servatudlaud.jpg",
+   "term_et": "Servatud laud",
+   "term_ru": "обрезная доска",
+   "category": "puitmaterjalid",
+   "description": "Доска с ровными, аккуратно обрезанными краями.",
+   "prompt": "clean straight-edged sawn board, smooth plank"
+  },
+  {
+   "filename": "hooveldatudlaud.jpg",
+   "term_et": "Hööveldatud laud",
+   "term_ru": "строганая доска",
+   "category": "puitmaterjalid",
+   "description": "Доска, которую обработали рубанком, чтобы поверхность стала гладкой.",
+   "prompt": "smooth planed wooden board with even surface"
+  },
+  {
+   "filename": "latt.jpg",
+   "term_et": "Latt",
+   "term_ru": "рейка",
+   "category": "puitmaterjalid",
+   "description": "Тонкая узкая длинная дощечка. Из реек делают рамки и обрешётку.",
+   "prompt": "thin narrow wooden lath strip"
+  },
+  {
+   "filename": "liist.jpg",
+   "term_et": "Liist",
+   "term_ru": "планка",
+   "category": "puitmaterjalid",
+   "description": "Узкая полоска дерева, которой украшают мебель или закрывают стыки.",
+   "prompt": "narrow wooden moulding / trim strip"
+  },
+  {
+   "filename": "spoon.jpg",
+   "term_et": "Spoon",
+   "term_ru": "шпон",
+   "category": "puitmaterjalid",
+   "description": "Очень тонкий лист дерева, похожий на бумагу. Шпоном обклеивают фанеру и мебель.",
+   "prompt": "thin wood veneer sheet, slightly curved"
+  },
+  {
+   "filename": "saepuru.jpg",
+   "term_et": "Saepuru",
+   "term_ru": "опилки",
+   "category": "puitmaterjalid",
+   "description": "Мелкие кусочки дерева, которые остаются после пиления.",
+   "prompt": "pile of sawdust"
+  },
+  {
+   "filename": "laastud.jpg",
+   "term_et": "Laastud",
+   "term_ru": "стружка",
+   "category": "puitmaterjalid",
+   "description": "Тонкие завитки дерева, которые срезает рубанок.",
+   "prompt": "curly wood shavings"
+  },
+  {
+   "filename": "vineer.jpg",
+   "term_et": "Vineer",
+   "term_ru": "фанера",
+   "category": "puitmaterjalid",
+   "description": "Плита из склеенных тонких слоёв дерева — прочная и лёгкая.",
+   "prompt": "plywood sheet with visible layers"
+  },
+  {
+   "filename": "kolmekihilinevineer.jpg",
+   "term_et": "Kolmekihiline vineer",
+   "term_ru": "трёхслойная фанера",
+   "category": "puitmaterjalid",
+   "description": "Фанера из трёх склеенных слоёв дерева.",
+   "prompt": "three-ply plywood, edge showing exactly 3 layers"
+  },
+  {
+   "filename": "saepuruplaat.jpg",
+   "term_et": "Saepuruplaat",
+   "term_ru": "древесно-стружечная плита (ДСП)",
+   "category": "puitmaterjalid",
+   "description": "Плита из спрессованных опилок с клеем (древесно-стружечная плита, ДСП).",
+   "prompt": "particle board (chipboard), pressed wood chips surface"
+  },
+  {
+   "filename": "puitkiudplaat.jpg",
+   "term_et": "Puitkiudplaat",
+   "term_ru": "древесноволокнистая плита (ДВП)",
+   "category": "puitmaterjalid",
+   "description": "Плита из спрессованных волокон дерева (древесноволокнистая плита, ДВП).",
+   "prompt": "fibreboard/hardboard, smooth pressed wood fibers"
+  },
+  {
+   "filename": "lamineeritudsaepuruplaat.jpg",
+   "term_et": "Lamineeritud saepuruplaat",
+   "term_ru": "ламинированная древесно-стружечная плита (ЛДСП)",
+   "category": "puitmaterjalid",
+   "description": "ДСП, покрытая сверху гладкой плёнкой (ламинированная ДСП, ЛДСП).",
+   "prompt": "laminated particle board with smooth melamine coating"
+  },
+  {
+   "filename": "lamineeritudpuitkiudplaat.jpg",
+   "term_et": "Lamineeritud puitkiudplaat",
+   "term_ru": "ламинированная древесноволокнистая плита",
+   "category": "puitmaterjalid",
+   "description": "ДВП, покрытая защитной гладкой плёнкой.",
+   "prompt": "laminated fibreboard, melamine-faced board"
+  },
+  {
+   "filename": "kasisaag.jpg",
+   "term_et": "Käsisaag",
+   "term_ru": "ручная пила",
+   "category": "kasitooriistad",
+   "description": "Пила, которой пилят вручную: у неё ручка и полотно с зубчиками.",
+   "prompt": "hand saw with wooden handle"
+  },
+  {
+   "filename": "kirves.jpg",
+   "term_et": "Kirves",
+   "term_ru": "топор",
+   "category": "kasitooriistad",
+   "description": "Инструмент для рубки: на длинной ручке — тяжёлое острое лезвие.",
+   "prompt": "axe with wooden handle"
+  },
+  {
+   "filename": "johvsaag.jpg",
+   "term_et": "Jõhvsaag",
+   "term_ru": "лобзик",
+   "category": "kasitooriistad",
+   "description": "Пила с тонким полотном в рамке, чтобы выпиливать кривые линии.",
+   "prompt": "coping saw with thin blade and C-shaped frame"
+  },
+  {
+   "filename": "hoovel.jpg",
+   "term_et": "Höövel",
+   "term_ru": "рубанок",
+   "category": "kasitooriistad",
+   "description": "Инструмент, которым строгают дерево, снимая тонкую стружку и делая поверхность гладкой.",
+   "prompt": "hand plane for woodworking"
+  },
+  {
+   "filename": "peitel.jpg",
+   "term_et": "Peitel",
+   "term_ru": "стамеска",
+   "category": "kasitooriistad",
+   "description": "Инструмент с острым лезвием, которым вырезают углубления в дереве.",
+   "prompt": "wood chisel with handle"
+  },
+  {
+   "filename": "nuga.jpg",
+   "term_et": "Nuga",
+   "term_ru": "нож",
+   "category": "kasitooriistad",
+   "description": "Острое лезвие с ручкой, которым режут дерево и другие материалы.",
+   "prompt": "carving knife"
+  },
+  {
+   "filename": "puur.jpg",
+   "term_et": "Puur",
+   "term_ru": "сверло",
+   "category": "kasitooriistad",
+   "description": "Вращающийся инструмент, которым делают отверстия.",
+   "prompt": "drill bit, twist drill"
+  },
+  {
+   "filename": "vantkasipuur.jpg",
+   "term_et": "Väntkäsipuur",
+   "term_ru": "коловорот",
+   "category": "kasitooriistad",
+   "description": "Ручная дрель с ручкой, которой вручную вращают сверло.",
+   "prompt": "hand brace / bit-and-brace manual drill"
+  },
+  {
+   "filename": "viil.jpg",
+   "term_et": "Viil",
+   "term_ru": "напильник",
+   "category": "kasitooriistad",
+   "description": "Инструмент с насечками, которым снимают слой дерева и сглаживают поверхность.",
+   "prompt": "file tool with handle, woodworking file"
+  },
+  {
+   "filename": "viilraspel.jpg",
+   "term_et": "Viil-Raspel",
+   "term_ru": "напильник-рашпиль",
+   "category": "kasitooriistad",
+   "description": "Напильник с крупными зубчиками для грубой обработки дерева.",
+   "prompt": "wood rasp with handle"
+  },
+  {
+   "filename": "liivapaber.jpg",
+   "term_et": "Liivapaber",
+   "term_ru": "наждачная бумага",
+   "category": "kasitooriistad",
+   "description": "Бумага, покрытая мелкими песчинками, для шлифования поверхности.",
+   "prompt": "sandpaper sheets"
+  },
+  {
+   "filename": "pitskruvi.jpg",
+   "term_et": "Pitskruvi",
+   "term_ru": "струбцина",
+   "category": "kasitooriistad",
+   "description": "Зажим, которым прижимают детали, чтобы они не сдвигались во время работы.",
+   "prompt": "C-clamp / screw clamp for woodworking"
+  },
+  {
+   "filename": "kavand.jpg",
+   "term_et": "Kavand",
+   "term_ru": "эскиз",
+   "category": "kavandamine",
+   "description": "Быстрый рисунок-набросок будущей работы.",
+   "prompt": "pencil sketch of a design on paper"
+  },
+  {
+   "filename": "joonis.jpg",
+   "term_et": "Joonis",
+   "term_ru": "чертёж",
+   "category": "kavandamine",
+   "description": "Точный рисунок с размерами, по которому делают деталь.",
+   "prompt": "technical engineering drawing with dimension lines"
+  },
+  {
+   "filename": "joonlaud.jpg",
+   "term_et": "Joonlaud",
+   "term_ru": "линейка",
+   "category": "kavandamine",
+   "description": "Полоска с делениями, чтобы проводить прямые линии и измерять.",
+   "prompt": "ruler with measurement markings"
+  },
+  {
+   "filename": "nurgik.jpg",
+   "term_et": "Nurgik",
+   "term_ru": "угольник",
+   "category": "kavandamine",
+   "description": "Инструмент, которым проверяют и размечают прямые углы (90°).",
+   "prompt": "carpenter's try square (90-degree square)"
+  },
+  {
+   "filename": "moodulint.jpg",
+   "term_et": "Mõõdulint",
+   "term_ru": "рулетка",
+   "category": "kavandamine",
+   "description": "Свёрнутая лента с делениями для измерения длины.",
+   "prompt": "tape measure with retractable blade"
+  },
+  {
+   "filename": "mootkava.jpg",
+   "term_et": "Mõõtkava",
+   "term_ru": "масштаб",
+   "category": "kavandamine",
+   "description": "Число, которое показывает, во сколько раз рисунок меньше настоящего предмета.",
+   "prompt": "architect's scale ruler"
+  },
+  {
+   "filename": "pikkus.jpg",
+   "term_et": "Pikkus",
+   "term_ru": "длина",
+   "category": "kavandamine",
+   "description": "Размер предмета вдоль — от одного конца до другого.",
+   "prompt": "simple labeled diagram: wooden board with an arrow indicating its length"
+  },
+  {
+   "filename": "laius.jpg",
+   "term_et": "Laius",
+   "term_ru": "ширина",
+   "category": "kavandamine",
+   "description": "Размер предмета поперёк.",
+   "prompt": "simple labeled diagram: wooden board with an arrow indicating its width"
+  },
+  {
+   "filename": "paksus.jpg",
+   "term_et": "Paksus",
+   "term_ru": "толщина",
+   "category": "kavandamine",
+   "description": "Размер предмета в глубину — насколько он толстый.",
+   "prompt": "simple labeled diagram: edge of a board with an arrow indicating thickness"
+  },
+  {
+   "filename": "korgus.jpg",
+   "term_et": "Kõrgus",
+   "term_ru": "высота",
+   "category": "kavandamine",
+   "description": "Размер предмета снизу вверх.",
+   "prompt": "simple labeled diagram: wooden block with an arrow indicating height"
+  },
+  {
+   "filename": "sugavus.jpg",
+   "term_et": "Sügavus",
+   "term_ru": "глубина",
+   "category": "kavandamine",
+   "description": "Размер углубления или отверстия — насколько оно глубокое.",
+   "prompt": "simple labeled diagram: hole in wood with an arrow indicating depth"
+  },
+  {
+   "filename": "pealtvaade.jpg",
+   "term_et": "Pealtvaade",
+   "term_ru": "вид сверху",
+   "category": "kavandamine",
+   "description": "Как предмет выглядит, если смотреть на него сверху.",
+   "prompt": "simple labeled diagram: top view of a wooden object"
+  },
+  {
+   "filename": "kulgvaade.jpg",
+   "term_et": "Külgvaade",
+   "term_ru": "вид сбоку",
+   "category": "kavandamine",
+   "description": "Как предмет выглядит, если смотреть на него сбоку.",
+   "prompt": "simple labeled diagram: side view of a wooden object"
+  },
+  {
+   "filename": "altvaade.jpg",
+   "term_et": "Altvaade",
+   "term_ru": "вид снизу",
+   "category": "kavandamine",
+   "description": "Как предмет выглядит, если смотреть на него снизу.",
+   "prompt": "simple labeled diagram: bottom view of a wooden object"
+  },
+  {
+   "filename": "saagimine.jpg",
+   "term_et": "Saagimine",
+   "term_ru": "пиление",
+   "category": "tood",
+   "description": "Разрезание дерева пилой.",
+   "prompt": "hands sawing a wooden board with a hand saw"
+  },
+  {
+   "filename": "hooveldamine.jpg",
+   "term_et": "Hööveldamine",
+   "term_ru": "строгание",
+   "category": "tood",
+   "description": "Снятие тонкой стружки рубанком, чтобы поверхность стала гладкой.",
+   "prompt": "planing a wooden board with a hand plane"
+  },
+  {
+   "filename": "lihvimine.jpg",
+   "term_et": "Lihvimine",
+   "term_ru": "шлифование",
+   "category": "tood",
+   "description": "Обработка поверхности наждачной бумагой, чтобы она стала совсем гладкой.",
+   "prompt": "sanding a wooden surface with sandpaper"
+  },
+  {
+   "filename": "raiumine.jpg",
+   "term_et": "Raiumine",
+   "term_ru": "рубка",
+   "category": "tood",
+   "description": "Разрубание дерева топором.",
+   "prompt": "chopping a log with an axe"
+  },
+  {
+   "filename": "puurimine.jpg",
+   "term_et": "Puurimine",
+   "term_ru": "сверление",
+   "category": "tood",
+   "description": "Создание отверстия сверлом.",
+   "prompt": "drilling a hole into a wooden board"
+  },
+  {
+   "filename": "treimine.jpg",
+   "term_et": "Treimine",
+   "term_ru": "точение",
+   "category": "tood",
+   "description": "Обработка дерева на станке, где заготовка вращается.",
+   "prompt": "woodturning a piece of wood on a lathe"
+  },
+  {
+   "filename": "kinnitamine.jpg",
+   "term_et": "Kinnitamine",
+   "term_ru": "крепление",
+   "category": "tood",
+   "description": "Закрепление деталей, чтобы они не двигались.",
+   "prompt": "clamping two wooden pieces together with a clamp"
+  },
+  {
+   "filename": "kavandamine.jpg",
+   "term_et": "Kavandamine",
+   "term_ru": "эскизирование",
+   "category": "tood",
+   "description": "Создание наброска будущей работы.",
+   "prompt": "hands sketching a design with a pencil on paper"
+  },
+  {
+   "filename": "joonestamine.jpg",
+   "term_et": "Joonestamine",
+   "term_ru": "черчение",
+   "category": "tood",
+   "description": "Вычерчивание точного чертежа с размерами.",
+   "prompt": "drawing a technical draft with ruler and pencil"
+  },
+  {
+   "filename": "margistamine.jpg",
+   "term_et": "Märgistamine",
+   "term_ru": "разметка",
+   "category": "tood",
+   "description": "Нанесение линий и меток на деталь перед распилом.",
+   "prompt": "marking a line on wood with a pencil and ruler"
+  },
+  {
+   "filename": "mootmine.jpg",
+   "term_et": "Mõõtmine",
+   "term_ru": "измерение",
+   "category": "tood",
+   "description": "Определение размера предмета линейкой или рулеткой.",
+   "prompt": "measuring a wooden board with a ruler or tape measure"
+  }
+ ]
+}
