@@ -29,8 +29,9 @@ h2{font-size:1rem;font-weight:500;color:var(--muted);margin:0 0 12px}
 .card{background:var(--card);border-radius:22px;box-shadow:var(--shadow);
   padding:10px 10px 18px;text-align:center;position:relative;min-height:340px}
 .card .imgbox{position:relative;border-radius:16px;overflow:hidden;background:#f0eadf;
-  min-height:230px;display:flex;align-items:center;justify-content:center}
-.card img{max-width:100%;max-height:320px;object-fit:contain}
+  width:min(100%,460px);aspect-ratio:1/1;margin:0 auto;display:flex;
+  align-items:center;justify-content:center}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
 .card .hint-license{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.55);
   color:#fff;font-size:.68rem;padding:2px 7px;border-radius:999px}
 .word-et{font-size:1.9rem;font-weight:800;margin:14px 0 2px;color:#5b4020}
@@ -59,7 +60,7 @@ h2{font-size:1rem;font-weight:500;color:var(--muted);margin:0 0 12px}
 .listitem{background:#fff;border:2px solid #eee3d3;border-radius:16px;padding:10px;
   text-align:center;cursor:pointer;transition:.12s}
 .listitem:active{transform:scale(.97)}
-.listitem img{width:100%;height:110px;object-fit:cover;border-radius:10px;background:#f0eadf}
+.listitem img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;background:#f0eadf}
 .listitem .li-et{font-weight:800;font-size:.95rem;color:#5b4020;margin-top:6px}
 .listitem .li-ru{font-size:.8rem;color:var(--muted)}
 .footer{font-size:.72rem;color:var(--muted);text-align:center;margin-top:18px;line-height:1.5}
@@ -170,27 +171,33 @@ function render(){
       </div>
       <div class="word-et">${C.et}</div>
       <div class="word-ru" id="ru">${C.ru}</div>
-      <div class="desc">${C.desc||''}</div>
+      <div class="desc" id="desc">${C.desc||''}</div>
       <div id="controls"></div>
     </div>
     <div class="scorebar" id="score"></div>`;
   container.querySelector(".speak").onclick = () => speak(C.et);
 
   const ru = container.querySelector("#ru");
+  const desc = container.querySelector("#desc");
   const controls = container.querySelector("#controls");
   const scorebar = container.querySelector("#score");
 
   if(mode === "learn"){
     ru.classList.remove("reveal");
+    desc.classList.remove("reveal");
     controls.innerHTML = "";
     scorebar.innerHTML = "";
   } else if(mode === "review"){
     ru.classList.add("reveal");
-    // desc hidden too in review until reveal
+    desc.classList.add("reveal");
     controls.innerHTML = '<button class="btn" id="showBtn">Показать перевод 👀</button>';
-    document.getElementById("showBtn").onclick = () => ru.classList.remove("reveal");
+    document.getElementById("showBtn").onclick = () => {
+      ru.classList.remove("reveal");
+      desc.classList.remove("reveal");
+    };
     scorebar.innerHTML = "";
   } else if(mode === "quiz"){
+    desc.classList.add("reveal");
     buildQuiz(C, ru, controls, scorebar);
   }
 }
