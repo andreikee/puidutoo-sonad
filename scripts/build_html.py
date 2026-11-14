@@ -71,9 +71,8 @@ h2{font-size:1rem;font-weight:500;color:var(--muted);margin:0 0 12px}
 .card{background:var(--card);border-radius:22px;box-shadow:var(--shadow);
   padding:10px 10px 18px;text-align:center;position:relative;min-height:340px}
 .card .imgbox{position:relative;border-radius:16px;overflow:hidden;background:#f0eadf;
-  width:min(100%,460px);aspect-ratio:1/1;margin:0 auto;display:flex;
-  align-items:center;justify-content:center}
-.card img{width:100%;height:100%;object-fit:cover;display:block}
+  width:min(100%,460px);margin:0 auto;text-align:center}
+.card img{width:100%;height:auto;display:block;border-radius:16px}
 .card .hint-license{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.55);
   color:#fff;font-size:.68rem;padding:2px 7px;border-radius:999px}
 .word-et{font-size:1.9rem;font-weight:800;margin:14px 0 2px;color:#5b4020}
@@ -102,7 +101,7 @@ h2{font-size:1rem;font-weight:500;color:var(--muted);margin:0 0 12px}
 .listitem{background:#fff;border:2px solid #eee3d3;border-radius:16px;padding:10px;
   text-align:center;cursor:pointer;transition:.12s}
 .listitem:active{transform:scale(.97)}
-.listitem img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;background:#f0eadf}
+.listitem img{width:100%;height:auto;border-radius:10px;background:#f0eadf;display:block}
 .listitem .li-et{font-weight:800;font-size:.95rem;color:#5b4020;margin-top:6px}
 .listitem .li-ru{font-size:.8rem;color:var(--muted)}
 .footer{font-size:.72rem;color:var(--muted);text-align:center;margin-top:18px;line-height:1.5}
@@ -229,7 +228,7 @@ function render(){
   container.innerHTML = `
     <div class="card">
       <div class="imgbox">
-        <img src="data:image/jpeg;base64,${C.b64}" alt="">
+        <img src="data:image/jpeg;base64,${C.b64}" alt="" width="460" height="460">
         <div class="hint-license" ${C.license ? '' : 'hidden'}>${C.license||''}</div>
         <button class="speak" title="Послушать">🔊</button>
       </div>
@@ -288,7 +287,7 @@ function renderQuiz(container, prog, nav){
   container.innerHTML = `
     <div class="card">
       <div class="imgbox">
-        <img src="data:image/jpeg;base64,${C.b64}" alt="">
+        <img src="data:image/jpeg;base64,${C.b64}" alt="" width="460" height="460">
         <div class="hint-license" ${C.license ? '' : 'hidden'}>${C.license||''}</div>
         <button class="speak" title="Послушать">🔊</button>
       </div>
@@ -442,7 +441,7 @@ function buildList(container){
   for(const i of f){
     const C = CARDS[i];
     html += `<div class="listitem" data-card="${i}">
-        <img src="data:image/jpeg;base64,${C.b64}" alt="">
+        <img src="data:image/jpeg;base64,${C.b64}" alt="" width="200" height="200">
         <div class="li-et">${C.et}</div><div class="li-ru">${C.ru}</div></div>`;
   }
   html += '</div>';
