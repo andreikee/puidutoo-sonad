@@ -236,6 +236,7 @@ function render(){
     document.getElementById("showBtn").onclick = () => {
       ru.classList.remove("reveal");
       desc.classList.remove("reveal");
+      document.getElementById("showBtn").style.display = "none";
     };
     scorebar.innerHTML = "";
   } else if(mode === "quiz"){
