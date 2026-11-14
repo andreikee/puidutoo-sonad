@@ -123,8 +123,10 @@ function speak(et){
     speechSynthesis.speak(u);
   }catch(e){}
 }
-function setMode(m){
-  mode = m; pos = 0; answers = {}; quizOpts = {};
+function setMode(m, keepPos){
+  mode = m;
+  if(!keepPos) pos = 0;
+  answers = {}; quizOpts = {};
   document.querySelectorAll(".mode").forEach(el => el.classList.toggle("active", el.dataset.mode===m));
   render();
 }
@@ -257,7 +259,7 @@ function buildList(container){
     const ci = parseInt(el.dataset.card, 10);
     const f2 = filtered();
     const rel = f2.indexOf(ci);
-    if(rel >= 0){ pos = rel; setMode("learn"); }
+    if(rel >= 0){ pos = rel; setMode("learn", true); }
   });
 }
 document.getElementById("modes").querySelectorAll(".mode").forEach(el =>
