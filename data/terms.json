@@ -1,0 +1,110 @@
+{
+  "title": "Tehnoloogia tunnis vajalikud sõnad (puidutööd)",
+  "subtitle": "Технология (работы по дереву) — русско-эстонский словарь терминов",
+  "language": {
+    "primary": "et",
+    "secondary": "ru"
+  },
+  "audio": {
+    "enabled": true,
+    "lang": "et-EE"
+  },
+  "categories": [
+    {
+      "id": "puitmaterjalid",
+      "title": "Puitmaterjalid",
+      "titleRu": "Древесные материалы",
+      "icon": "🌲"
+    },
+    {
+      "id": "kasitooriistad",
+      "title": "Käsitööriistad",
+      "titleRu": "Ручные инструменты",
+      "icon": "🔨"
+    },
+    {
+      "id": "kavandamine",
+      "title": "Kavandamine, joonestamine, mõõtmine",
+      "titleRu": "Планирование, черчение, измерение",
+      "icon": "📐"
+    },
+    {
+      "id": "tood",
+      "title": "Tööd",
+      "titleRu": "Рабочие операции",
+      "icon": "🛠️"
+    }
+  ],
+  "terms": [
+    { "id": "puit", "et": "Puit", "ru": "древесина", "category": "puitmaterjalid", "query": "wood timber" },
+    { "id": "okaspuu", "et": "Okaspuu", "ru": "хвойное дерево", "category": "puitmaterjalid", "query": "conifer tree spruce pine" },
+    { "id": "lehtpuu", "et": "Lehtpuu", "ru": "лиственное дерево", "category": "puitmaterjalid", "query": "deciduous tree" },
+    { "id": "mand", "et": "Mänd (männipuu)", "ru": "сосна", "category": "puitmaterjalid", "query": "pine tree Pinus sylvestris" },
+    { "id": "kuusk", "et": "Kuusk (kuusepuu)", "ru": "ель", "category": "puitmaterjalid", "query": "spruce tree Picea abies" },
+    { "id": "kask", "et": "Kask (kasepuu)", "ru": "берёза", "category": "puitmaterjalid", "query": "birch tree Betula" },
+    { "id": "tamm", "et": "Tamm (tammepuu)", "ru": "дуб", "category": "puitmaterjalid", "query": "oak tree Quercus" },
+    { "id": "vaher", "et": "Vaher (vahtrapuu)", "ru": "клён", "category": "puitmaterjalid", "query": "maple tree Acer" },
+    { "id": "saar", "et": "Saar (saarepuu)", "ru": "ясень", "category": "puitmaterjalid", "query": "ash tree Fraxinus" },
+    { "id": "parn", "et": "Pärn (pärnapuu)", "ru": "липа", "category": "puitmaterjalid", "query": "linden tree lime tree Tilia" },
+    { "id": "lepp", "et": "Lepp (lepapuu)", "ru": "ольха", "category": "puitmaterjalid", "query": "alder tree Alnus" },
+    { "id": "umarpuit", "et": "Ümarpuit", "ru": "кругляк", "category": "puitmaterjalid", "query": "roundwood logs" },
+    { "id": "palk", "et": "Palk", "ru": "бревно", "category": "puitmaterjalid", "query": "log trunk" },
+    { "id": "saekaater", "et": "Saekaater", "ru": "пилорама", "category": "puitmaterjalid", "query": "sawmill" },
+    { "id": "saematerjal", "et": "Saematerjal", "ru": "пиломатериал", "category": "puitmaterjalid", "query": "sawn timber lumber" },
+    { "id": "pruss", "et": "Pruss", "ru": "брус", "category": "puitmaterjalid", "query": "beam timber" },
+    { "id": "servamatalaud", "et": "Servamata laud", "ru": "необрезная доска", "category": "puitmaterjalid", "query": "untrimmed board wane" },
+    { "id": "servatudlaud", "et": "Servatud laud", "ru": "обрезная доска", "category": "puitmaterjalid", "query": "edged board plank" },
+    { "id": "hooveldatudlaud", "et": "Hööveldatud laud", "ru": "строганая доска", "category": "puitmaterjalid", "query": "planed board" },
+    { "id": "latt", "et": "Latt", "ru": "рейка", "category": "puitmaterjalid", "query": "lath batten strip" },
+    { "id": "liist", "et": "Liist", "ru": "планка", "category": "puitmaterjalid", "query": "moulding trim strip" },
+    { "id": "spoon", "et": "Spoon", "ru": "шпон", "category": "puitmaterjalid", "query": "veneer" },
+    { "id": "saepuru", "et": "Saepuru", "ru": "опилки", "category": "puitmaterjalid", "query": "sawdust" },
+    { "id": "laastud", "et": "Laastud", "ru": "стружка", "category": "puitmaterjalid", "query": "wood shavings" },
+    { "id": "vineer", "et": "Vineer", "ru": "фанера", "category": "puitmaterjalid", "query": "plywood" },
+    { "id": "kolmekihilinevineer", "et": "Kolmekihiline vineer", "ru": "трёхслойная фанера", "category": "puitmaterjalid", "query": "three-ply plywood" },
+    { "id": "saepuruplaat", "et": "Saepuruplaat", "ru": "древесно-стружечная плита (ДСП)", "category": "puitmaterjalid", "query": "particle board chipboard" },
+    { "id": "puitkiudplaat", "et": "Puitkiudplaat", "ru": "древесноволокнистая плита (ДВП)", "category": "puitmaterjalid", "query": "fibreboard fiberboard hardboard" },
+    { "id": "lamineeritudsaepuruplaat", "et": "Lamineeritud saepuruplaat", "ru": "ламинированная древесно-стружечная плита (ЛДСП)", "category": "puitmaterjalid", "query": "laminated chipboard melamine board" },
+    { "id": "lamineeritudpuitkiudplaat", "et": "Lamineeritud puitkiudplaat", "ru": "ламинированная древесноволокнистая плита", "category": "puitmaterjalid", "query": "laminated fibreboard melamine faced board" },
+
+    { "id": "kasisaag", "et": "Käsisaag", "ru": "ручная пила", "category": "kasitooriistad", "query": "hand saw" },
+    { "id": "kirves", "et": "Kirves", "ru": "топор", "category": "kasitooriistad", "query": "axe hatchet" },
+    { "id": "johvsaag", "et": "Jõhvsaag", "ru": "лобзик", "category": "kasitooriistad", "query": "coping saw fretsaw" },
+    { "id": "hoovel", "et": "Höövel", "ru": "рубанок", "category": "kasitooriistad", "query": "hand plane woodworking plane" },
+    { "id": "peitel", "et": "Peitel", "ru": "стамеска", "category": "kasitooriistad", "query": "chisel" },
+    { "id": "nuga", "et": "Nuga", "ru": "нож", "category": "kasitooriistad", "query": "knife carving knife" },
+    { "id": "puur", "et": "Puur", "ru": "сверло", "category": "kasitooriistad", "query": "drill bit" },
+    { "id": "vantkasipuur", "et": "Väntkäsipuur", "ru": "коловорот", "category": "kasitooriistad", "query": "brace hand drill brace and bit" },
+    { "id": "viil", "et": "Viil", "ru": "напильник", "category": "kasitooriistad", "query": "file rasp tool" },
+    { "id": "viilraspel", "et": "Viil-Raspel", "ru": "напильник-рашпиль", "category": "kasitooriistad", "query": "rasp file" },
+    { "id": "liivapaber", "et": "Liivapaber", "ru": "наждачная бумага", "category": "kasitooriistad", "query": "sandpaper" },
+    { "id": "pitskruvi", "et": "Pitskruvi", "ru": "струбцина", "category": "kasitooriistad", "query": "clamp screw clamp" },
+
+    { "id": "kavand", "et": "Kavand", "ru": "эскиз", "category": "kavandamine", "query": "sketch drawing draft" },
+    { "id": "joonis", "et": "Joonis", "ru": "чертёж", "category": "kavandamine", "query": "technical drawing" },
+    { "id": "joonlaud", "et": "Joonlaud", "ru": "линейка", "category": "kavandamine", "query": "ruler" },
+    { "id": "nurgik", "et": "Nurgik", "ru": "угольник", "category": "kavandamine", "query": "try square" },
+    { "id": "moodulint", "et": "Mõõdulint", "ru": "рулетка", "category": "kavandamine", "query": "tape measure" },
+    { "id": "mootkava", "et": "Mõõtkava", "ru": "масштаб", "category": "kavandamine", "query": "scale ruler" },
+    { "id": "pikkus", "et": "Pikkus", "ru": "длина", "category": "kavandamine", "query": "length" },
+    { "id": "laius", "et": "Laius", "ru": "ширина", "category": "kavandamine", "query": "width" },
+    { "id": "paksus", "et": "Paksus", "ru": "толщина", "category": "kavandamine", "query": "thickness" },
+    { "id": "korgus", "et": "Kõrgus", "ru": "высота", "category": "kavandamine", "query": "height" },
+    { "id": "sugavus", "et": "Sügavus", "ru": "глубина", "category": "kavandamine", "query": "depth" },
+    { "id": "pealtvaade", "et": "Pealtvaade", "ru": "вид сверху", "category": "kavandamine", "query": "top view plan view" },
+    { "id": "kulgvaade", "et": "Külgvaade", "ru": "вид сбоку", "category": "kavandamine", "query": "side view" },
+    { "id": "altvaade", "et": "Altvaade", "ru": "вид снизу", "category": "kavandamine", "query": "bottom view" },
+
+    { "id": "saagimine", "et": "Saagimine", "ru": "пиление", "category": "tood", "query": "sawing" },
+    { "id": "hooveldamine", "et": "Hööveldamine", "ru": "строгание", "category": "tood", "query": "planing woodworking" },
+    { "id": "lihvimine", "et": "Lihvimine", "ru": "шлифование", "category": "tood", "query": "sanding wood" },
+    { "id": "raiumine", "et": "Raiumine", "ru": "рубка", "category": "tood", "query": "chopping wood axe" },
+    { "id": "puurimine", "et": "Puurimine", "ru": "сверление", "category": "tood", "query": "drilling" },
+    { "id": "treimine", "et": "Treimine", "ru": "точение", "category": "tood", "query": "wood turning lathe" },
+    { "id": "kinnitamine", "et": "Kinnitamine", "ru": "крепление", "category": "tood", "query": "clamping fastening" },
+    { "id": "kavandamine", "et": "Kavandamine", "ru": "эскизирование", "category": "tood", "query": "sketching" },
+    { "id": "joonestamine", "et": "Joonestamine", "ru": "черчение", "category": "tood", "query": "drafting technical drawing" },
+    { "id": "margistamine", "et": "Märgistamine", "ru": "разметка", "category": "tood", "query": "marking out marking gauge" },
+    { "id": "mootmine", "et": "Mõõtmine", "ru": "измерение", "category": "tood", "query": "measuring" }
+  ]
+}
