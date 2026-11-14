@@ -23,9 +23,9 @@ for t in terms["terms"]:
     mi = imgs[tid]
     fpath = os.path.join(IMG, mi["file"])
     img = Image.open(fpath).convert("RGB")
-    img.thumbnail((520, 520))
+    img.thumbnail((1024, 1024))
     buf = BytesIO()
-    img.save(buf, "JPEG", quality=80, optimize=True)
+    img.save(buf, "JPEG", quality=85, optimize=True)
     b64 = base64.b64encode(buf.getvalue()).decode("ascii")
     cards.append({
         "id": tid,

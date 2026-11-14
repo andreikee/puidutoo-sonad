@@ -2,7 +2,7 @@
  "purpose": "Generate a set of child-friendly educational images for a woodwork vocabulary trainer (age 11, 5th grade).",
  "output": {
   "format": "jpg",
-  "size": "512x512",
+  "size": "1024x1024",
   "style": "Clean, simple educational photo/illustration on a plain light background; single subject centered; soft even lighting; no text, no watermark, no logos; square 1:1. For diagram terms (dimensions and views), a simple labeled line drawing is fine."
  },
  "images": [

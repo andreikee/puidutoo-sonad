@@ -13,7 +13,7 @@ spec = {
     "purpose": "Generate a set of child-friendly educational images for a woodwork vocabulary trainer (age 11, 5th grade).",
     "output": {
         "format": terms.get("image_format", "jpg"),
-        "size": terms.get("image_size", "512x512"),
+        "size": terms.get("image_size", "1024x1024"),
         "style": terms.get("image_style", ""),
     },
     "images": [],
