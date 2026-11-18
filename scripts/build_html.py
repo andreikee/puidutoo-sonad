@@ -94,6 +94,14 @@ h2{font-size:1rem;font-weight:500;color:var(--muted);margin:0 0 12px}
 .qopt.correct{background:var(--good);border-color:var(--good);color:#fff}
 .qopt.wrong{background:var(--bad);border-color:var(--bad);color:#fff}
 .qopt.dim{opacity:.55}
+.dirtoggle{display:flex;justify-content:center;gap:8px;margin:0 0 12px;flex-wrap:wrap}
+.dirtoggle-btn{background:#fff;border:2px solid #eee3d3;border-radius:999px;padding:7px 16px;
+  font-weight:700;font-size:.9rem;color:#b98a5a;cursor:pointer;transition:.15s}
+.dirtoggle-btn.active{border-color:var(--pine2);color:var(--pine);background:#f2fbf4}
+.word-question{font-size:1.9rem;font-weight:800;margin:18px 0 6px;color:#5b4020}
+.quizhint{min-height:46px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.quizhint img{max-width:100%;max-height:320px;border-radius:12px;display:block}
+.hint-license{position:static;display:inline-block;margin-top:4px}
 .scorebar{display:flex;justify-content:center;gap:14px;font-weight:700;margin:6px 0;color:#7a5b39}
 .progress{height:8px;background:#eee3d3;border-radius:999px;overflow:hidden;margin:8px 0}
 .progress > div{height:100%;background:linear-gradient(90deg,var(--pine),var(--pine2));width:0;transition:.3s}
@@ -151,6 +159,8 @@ let quizOpts = {};
 // quiz round state: "main" | "retry"; ids answered wrong in the last round
 let quizStage = "main";
 let wrongIds = [];
+// quiz direction: "et-ru" (show Estonian, answer Russian) | "ru-et" (reverse)
+let quizDir = "et-ru";
 
 function filtered(){
   return cat === "all" ? order : order.filter(i => CARDS[i].cat === cat);
@@ -183,8 +193,7 @@ function setMode(m, keepPos){
   answers = {}; quizOpts = {}; quizStage = "main"; wrongIds = [];
   document.querySelectorAll(".mode").forEach(el => el.classList.toggle("active", el.dataset.mode===m));
   render();
-}
-function renderChips(){
+}function renderChips(){
   const ch = document.getElementById("chips");
   let html = '<div class="chip active" data-cat="all">Все</div>';
   for(const c of CATS){ html += `<div class="chip" data-cat="${c.id}">${c.icon} ${c.titleRu}</div>`; }
@@ -284,26 +293,35 @@ function renderQuiz(container, prog, nav){
   prog.style.width = (answered / total * 100) + "%";
 
   const C = CARDS[nidx];
+  const qword = quizDir === "ru-et" ? C.ru : C.et; // the word shown as question
+
   container.innerHTML = `
+    <div class="dirtoggle">
+      <div class="dirtoggle-btn ${quizDir==='et-ru'?'active':''}" data-dir="et-ru">🇪🇪 → 🇷🇺</div>
+      <div class="dirtoggle-btn ${quizDir==='ru-et'?'active':''}" data-dir="ru-et">🇷🇺 → 🇪🇪</div>
+    </div>
     <div class="card">
-      <div class="imgbox">
-        <img src="data:image/jpeg;base64,${C.b64}" alt="" width="460" height="460">
-        <div class="hint-license" ${C.license ? '' : 'hidden'}>${C.license||''}</div>
-        <button class="speak" title="Послушать">🔊</button>
-      </div>
-      <div class="word-et">${C.et}</div>
-      <div class="word-ru" id="ru">${C.ru}</div>
-      <div class="desc reveal" id="desc">${C.desc||''}</div>
+      <div class="quizhint" id="hint"></div>
+      <div class="word-question" id="qword">${qword}</div>
       <div id="controls"></div>
     </div>
     <div class="scorebar" id="score"></div>`;
-  container.querySelector(".speak").onclick = () => speak(C.et);
 
-  const ru = container.querySelector("#ru");
-  const desc = container.querySelector("#desc");
+  // direction toggle buttons
+  container.querySelectorAll(".dirtoggle-btn").forEach(el => el.onclick = () => {
+    const d = el.dataset.dir;
+    if(d === quizDir) return;
+    quizDir = d;
+    // restart the quiz cleanly in the new direction
+    answers = {}; quizOpts = {}; quizStage = "main"; wrongIds = []; pos = 0;
+    render();
+  });
+
   const controls = container.querySelector("#controls");
   const scorebar = container.querySelector("#score");
-  buildQuiz(C, ru, controls, scorebar);
+  const hint = container.querySelector("#hint");
+
+  buildQuiz(C, controls, scorebar, hint);
 }
 function sample(arr,n){
   const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
@@ -322,13 +340,18 @@ function nextQuizCard(){
   }
   return -1;
 }
-function buildQuiz(C, ru, controls, scorebar){
+function buildQuiz(C, controls, scorebar, hint){
   setScore(scorebar, true);
-  ru.classList.add("reveal");
+
+  // hint box: image hidden by default, revealed by a button
+  hint.innerHTML = '<button class="btn ghost" id="hintBtn">💡 Подсказка (картинка)</button>';
+  document.getElementById("hintBtn").onclick = () => {
+    hint.innerHTML = `<img src="data:image/jpeg;base64,${C.b64}" alt="" width="460" height="460">`;
+  };
 
   if(answers[C.id]){
     // already answered -> show locked result, no double count
-    showQuizOptions(controls, C, quizOpts[C.id], answers[C.id]);
+    showQuizOptions(controls, C, quizOpts[C.id], answers[C.id], hint);
     return;
   }
 
@@ -337,26 +360,29 @@ function buildQuiz(C, ru, controls, scorebar){
   const others = pool.filter(c => c.cat !== C.cat);
   let lets = sample(sameCat, Math.min(3, sameCat.length));
   if(lets.length < 3) lets = lets.concat(sample(others, 3 - lets.length));
-  const opts = lets.slice(0,3).map(c => c.ru);
-  opts.push(C.ru);
+  // options are the "answer" side of translation
+  const opts = lets.slice(0,3).map(c => quizDir === "ru-et" ? c.et : c.ru);
+  const correct = quizDir === "ru-et" ? C.et : C.ru;
+  opts.push(correct);
   opts.sort(() => Math.random() - 0.5);
   quizOpts[C.id] = opts;
-  showQuizOptions(controls, C, opts, null);
+  showQuizOptions(controls, C, opts, null, hint);
 }
-function showQuizOptions(controls, C, opts, locked){
+function showQuizOptions(controls, C, opts, locked, hint){
+  const correct = quizDir === "ru-et" ? C.et : C.ru;
   controls.innerHTML = '<div class="qopts">' +
     opts.map(o => {
       let cls = "qopt";
-      if(locked){ cls += " dim"; if(o === C.ru) cls += " correct"; }
-      return `<div class="qopt ${cls}" data-ru="${o.replace(/"/g,'&quot;')}">${o}</div>`;
+      if(locked){ cls += " dim"; if(o === correct) cls += " correct"; }
+      return `<div class="qopt ${cls}" data-val="${o.replace(/"/g,'&quot;')}">${o}</div>`;
     }).join('') + '</div>';
   controls.querySelectorAll(".qopt").forEach(el => el.onclick = () => {
     if(answers[C.id]) return; // locked
-    const isRight = el.dataset.ru === C.ru;
+    const isRight = el.dataset.val === correct;
     answers[C.id] = isRight ? "right" : "wrong";
     controls.querySelectorAll(".qopt").forEach(x=>{
       x.classList.add("dim");
-      if(x.dataset.ru === C.ru) x.classList.add("correct");
+      if(x.dataset.val === correct) x.classList.add("correct");
     });
     if(!isRight) el.classList.add("wrong");
     setScore(document.getElementById("score"), true);
