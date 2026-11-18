@@ -119,6 +119,9 @@ let quizStage = "main";
 let wrongIds = [];
 // quiz direction: "et-ru" (show Estonian, answer Russian) | "ru-et" (reverse)
 let quizDir = "et-ru";
+// quiz question ordering
+let quizOrder = null;
+let quizShuffled = false;
 
 function filtered(){
   return cat === "all" ? order : order.filter(i => CARDS[i].cat === cat);
@@ -126,7 +129,20 @@ function filtered(){
 // the set of card indices the current quiz round asks about
 function quizPool(){
   if(quizStage === "retry"){ return wrongIds; }
-  return filtered();
+  if(quizOrder === null) buildQuizOrder();
+  return quizOrder;
+}
+function buildQuizOrder(){
+  const base = (cat === "all")
+    ? CARDS.map((c,i)=>i)
+    : CARDS.map((c,i)=>i).filter(i => CARDS[i].cat === cat);
+  if(!quizShuffled){
+    quizOrder = base;
+  } else {
+    const a = base.slice();
+    for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+    quizOrder = a;
+  }
 }
 function cardIdx(){
   const f = filtered();
@@ -255,6 +271,10 @@ function renderQuiz(container, prog, nav){
 
   container.innerHTML = `
     <div class="dirtoggle">
+      <div class="dirtoggle-btn ${quizShuffled?'':'active'}" data-shuffle="0">🔢 По порядку</div>
+      <div class="dirtoggle-btn ${quizShuffled?'active':''}" data-shuffle="1">🔀 Вперемешку</div>
+    </div>
+    <div class="dirtoggle">
       <div class="dirtoggle-btn ${quizDir==='et-ru'?'active':''}" data-dir="et-ru">🇪🇪 → 🇷🇺</div>
       <div class="dirtoggle-btn ${quizDir==='ru-et'?'active':''}" data-dir="ru-et">🇷🇺 → 🇪🇪</div>
     </div>
@@ -265,8 +285,19 @@ function renderQuiz(container, prog, nav){
     </div>
     <div class="scorebar" id="score"></div>`;
 
+  // ordering toggle buttons
+  container.querySelectorAll(".dirtoggle-btn[data-shuffle]").forEach(el => el.onclick = () => {
+    const s = el.dataset.shuffle === "1";
+    if(s === quizShuffled) return;
+    quizShuffled = s;
+    quizOrder = null;
+    // restart the quiz cleanly with the new ordering
+    answers = {}; quizOpts = {}; quizStage = "main"; wrongIds = []; pos = 0;
+    render();
+  });
+
   // direction toggle buttons
-  container.querySelectorAll(".dirtoggle-btn").forEach(el => el.onclick = () => {
+  container.querySelectorAll(".dirtoggle-btn[data-dir]").forEach(el => el.onclick = () => {
     const d = el.dataset.dir;
     if(d === quizDir) return;
     quizDir = d;
